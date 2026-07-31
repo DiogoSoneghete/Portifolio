@@ -1,0 +1,148 @@
+/* ==========================================================================
+   Estilos Personalizados - Portfólio Profissional Diogo Soneghete
+   ========================================================================== */
+
+/* Rolagem Suave Global */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* 80px para o header fixo */
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0284c7;
+}
+
+/* Link de Acessibilidade (Skip to Content) */
+.skip-link:focus {
+  outline: 3px solid #38bdf8;
+  outline-offset: 2px;
+}
+
+/* Estilos dos Botões de Filtro de Habilidades */
+.skill-tab-btn {
+  background-color: transparent;
+  color: #64748b;
+  border: 1px solid transparent;
+}
+
+.dark .skill-tab-btn {
+  color: #94a3b8;
+}
+
+.skill-tab-btn:hover {
+  color: #0284c7;
+  background-color: #f1f5f9;
+}
+
+.dark .skill-tab-btn:hover {
+  color: #38bdf8;
+  background-color: #1e293b;
+}
+
+.skill-tab-btn.active {
+  background-color: #0284c7;
+  color: #ffffff !important;
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+}
+
+/* Estilos das Tags de Filtro de Projetos */
+.project-tag-btn {
+  background-color: #f1f5f9;
+  color: #475569;
+}
+
+.dark .project-tag-btn {
+  background-color: #1e293b;
+  color: #94a3b8;
+}
+
+.project-tag-btn:hover {
+  background-color: #e2e8f0;
+  color: #0f172a;
+}
+
+.dark .project-tag-btn:hover {
+  background-color: #334155;
+  color: #ffffff;
+}
+
+.project-tag-btn.active {
+  background-color: #0e7490;
+  color: #ffffff !important;
+}
+
+/* Destaque do Link Ativo no Header */
+.nav-link.active-link {
+  color: #0284c7 !important;
+  font-weight: 700;
+  background-color: rgba(2, 132, 199, 0.1);
+}
+
+.dark .nav-link.active-link {
+  color: #38bdf8 !important;
+}
+
+/* Animações e Efeitos Glassmorphism */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Suporte à Preferência de Movimento Reduzido */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Estilos de Impressão (Visualizar/Imprimir CV) */
+@media print {
+  header,
+  #theme-toggle,
+  #mobile-menu-button,
+  #back-to-top,
+  #contact-form,
+  #project-search,
+  .skill-tab-btn,
+  .project-tag-btn {
+    display: none !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  section {
+    page-break-inside: avoid;
+    padding: 1rem 0 !important;
+  }
+}
