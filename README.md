@@ -2,7 +2,7 @@
 
 Portfólio web de **Diogo Soneghete de Almeida**, Desenvolvedor Full-Stack.
 
-## 🛠️ Tecnologias Utilizadas
+## 🛠️ Tecnologias
 
 - **Front-End**: React 18, TypeScript, Tailwind CSS, HTML5 / CSS3
 - **Back-End**: Node.js, Python (FastAPI), Java (Spring Boot), C#
