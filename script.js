@@ -199,18 +199,18 @@ const projectsData = {
   broker: {
     category: "Web Corporativo",
     title: "Broker Corretora - Sistema de Gestão Comercial",
-    description: "Plataforma web corporativa desenvolvida para centralizar e automatizar toda a operação da Broker Corretora. O sistema conta com um painel executivo completo para administradores, área de metas e comissões para corretores e exibição de métricas em tempo real para telas de TV no escritório.",
+    description: "Plataforma web corporativa de gestão comercial desenvolvida para centralizar a operação da corretora. Integra painel executivo para gestores, metas de corretores, métricas em tempo real para TV, automação de disparos de e-mails, importação inteligente de planilhas, disparo de alertas para whatsapp, entre outras funções internas.",
     problem: "Processos manuais descentralizados em planilhas que geravam atrasos no disparo de comunicados, erros de digitação e falta de visibilidade em tempo real sobre o fechamento de vendas.",
     result: "🚀 60% de redução no tempo de processamento de dados comerciais com automação de disparos de e-mail em massa e importação inteligente de Excel.",
     techs: ["React 18", "TypeScript", "Vite 7", "Tailwind CSS", "Shadcn UI", "React Query", "Supabase (PostgreSQL, Realtime, Edge Functions)", "Resend API", "Vitest"],
     link: "https://brokerbkr.vercel.app/"
   },
   backup: {
-    category: "Desktop & Cloud Security (Co-autoria)",
+    category: "Desktop & Cloud Security",
     title: "Sistema de Backup Automático Incremental",
-    description: "Projeto desenvolvido em colaboração com Eduardo Martins para proteção contra falhas e ransomware.",
-    problem: "Riscos operacionais de perda de dados críticos por falta de rotina automática de backup e dependência de intervenções manuais diárias.",
-    result: "Automação total de backups diários incrementais com criptografia de ponta a ponta e sincronização segura com AWS S3.",
+    description: "Sistema de backup automático desenvolvido para proteger dados contra falhas, exclusões e ransomware. Utiliza backups incrementais para otimizar o armazenamento, criptografia para garantir a segurança dos arquivos e AWS S3 para armazenamento em nuvem.",
+    problem: "Riscos operacionais de perda de dados críticos, falta de visibilidade em rotinas de backup e dependência de intervenções manuais diárias.",
+    result: "Automação total de backups incrementais com criptografia AES de ponta a ponta, integração com AWS S3 e restauração rápida de arquivos.",
     techs: ["Python", "FastAPI", "SQLite", "PostgreSQL", "Docker", "AWS S3", "REST APIs", "Criptografia AES", "Testes Automatizados"],
     link: "https://github.com/EduardoMMartins07/sistema-backup-inteligente"
   },
