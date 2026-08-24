@@ -206,9 +206,9 @@ const projectsData = {
     link: "https://brokerbkr.vercel.app/"
   },
   backup: {
-    category: "Desktop & Cloud Security",
+    category: "Desktop & Cloud Security (Co-autoria)",
     title: "Sistema de Backup Automático Incremental",
-    description: "Sistema inteligente para desktop e API Web contra perda de dados causadas por falhas de hardware, ransomware ou exclusão acidental. Automatiza a detecção de alterações, gera cópias seguras com versionamento e permite restauração instantânea.",
+    description: "Projeto desenvolvido em colaboração com Eduardo Martins para proteção contra falhas e ransomware.",
     problem: "Riscos operacionais de perda de dados críticos por falta de rotina automática de backup e dependência de intervenções manuais diárias.",
     result: "Automação total de backups diários incrementais com criptografia de ponta a ponta e sincronização segura com AWS S3.",
     techs: ["Python", "FastAPI", "SQLite", "PostgreSQL", "Docker", "AWS S3", "REST APIs", "Criptografia AES", "Testes Automatizados"],
@@ -368,3 +368,179 @@ function initFooterYear() {
     yearElement.textContent = new Date().getFullYear();
   }
 }
+
+/* ==========================================================================
+   10. COPIAR E-MAIL & NOTIFICAÇÕES (TOAST)
+   ========================================================================== */
+let toastTimeout = null;
+
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  const toastMsg = document.getElementById('toast-message');
+  if (!toast || !toastMsg) return;
+
+  toastMsg.textContent = message;
+  toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+  toast.classList.add('opacity-100', 'translate-y-0');
+
+  if (toastTimeout) clearTimeout(toastTimeout);
+
+  toastTimeout = setTimeout(() => {
+    toast.classList.remove('opacity-100', 'translate-y-0');
+    toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+  }, 3000);
+}
+
+function copyEmailToClipboard(email = 'diogosonegueti@gmail.com') {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(email).then(() => {
+      handleCopySuccess();
+    }).catch(() => {
+      fallbackCopyText(email);
+    });
+  } else {
+    fallbackCopyText(email);
+  }
+}
+
+function handleCopySuccess() {
+  const copyText = document.getElementById('copy-text');
+  const copyIcon = document.getElementById('copy-icon');
+
+  if (copyText) copyText.textContent = 'Copiado!';
+  if (copyIcon) {
+    copyIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>`;
+  }
+
+  showToast('E-mail copiado para a área de transferência!');
+
+  setTimeout(() => {
+    if (copyText) copyText.textContent = 'Copiar';
+    if (copyIcon) {
+      copyIcon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>`;
+    }
+  }, 2500);
+}
+
+function fallbackCopyText(text) {
+  const textArea = document.createElement('textarea');
+  textArea.value = text;
+  textArea.style.position = 'fixed';
+  textArea.style.left = '-999999px';
+  textArea.style.top = '-999999px';
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    document.execCommand('copy');
+    handleCopySuccess();
+  } catch (err) {
+    window.location.href = `mailto:${text}`;
+  }
+  document.body.removeChild(textArea);
+}
+
+/**
+ * Envio do Formulário de Contato - Direto e Funcional
+ */
+function getFormData() {
+  const name = document.getElementById('contact-name')?.value.trim();
+  const email = document.getElementById('contact-email')?.value.trim();
+  const subject = document.getElementById('contact-subject')?.value.trim();
+  const message = document.getElementById('contact-message')?.value.trim();
+
+  if (!name || !email || !subject || !message) {
+    const statusMsg = document.getElementById('form-status-msg');
+    if (statusMsg) {
+      statusMsg.textContent = 'Por favor, preencha todos os campos do formulário antes de enviar.';
+      statusMsg.className = 'text-xs text-center text-amber-500 font-semibold mt-2';
+    }
+    showToast('Preencha todos os campos obrigatórios.');
+    return null;
+  }
+
+  return { name, email, subject, message };
+}
+
+function handleContactSubmit(event) {
+  if (event) event.preventDefault();
+
+  const data = getFormData();
+  if (!data) return;
+
+  const { name, email, subject, message } = data;
+
+  const emailBody = `Olá Diogo,\n\nMeu nome é ${name} (${email}).\n\n${message}\n\n---\nEnviado através do seu Portfólio Profissional`;
+
+  // 1. URL Direta do Gmail Web com todos os parâmetros preenchidos
+  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=diogosonegueti@gmail.com&su=${encodeURIComponent(`[Contato Portfólio] ${subject}`)}&body=${encodeURIComponent(emailBody)}`;
+  
+  // 2. Abre a aba do Gmail diretamente
+  const win = window.open(gmailUrl, '_blank');
+
+  // 3. Fallback se bloqueador de popups impedir nova janela
+  if (!win || win.closed || typeof win.closed === 'undefined') {
+    const mailtoLink = `mailto:diogosonegueti@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
+    window.location.href = mailtoLink;
+  }
+
+  handleFormFeedback(`Mensagem pronta! Abrindo tela de envio para diogosonegueti@gmail.com...`);
+}
+
+function sendViaWhatsApp() {
+  const data = getFormData();
+  if (!data) return;
+
+  const { name, email, subject, message } = data;
+  const zapText = `Olá Diogo,\n\nMeu nome é *${name}* (${email}).\n\n${message}`;
+
+  const zapUrl = `https://wa.me/5527988495578?text=${encodeURIComponent(zapText)}`;
+  window.open(zapUrl, '_blank');
+
+  handleFormFeedback(`Abrindo WhatsApp com sua mensagem preenchida...`);
+}
+
+function copyFormMessage() {
+  const data = getFormData();
+  if (!data) return;
+
+  const { name, email, subject, message } = data;
+  const fullText = `Olá Diogo,\n\nMeu nome é ${name} (${email}).\n\n${message}\n\n---\nEnviado através do seu Portfólio Profissional`;
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(fullText).then(() => {
+      handleFormFeedback(`Texto copiado com sucesso! Você pode colar no seu e-mail ou mensagem.`);
+    }).catch(() => {
+      fallbackCopyText(fullText);
+      handleFormFeedback(`Texto copiado para a área de transferência!`);
+    });
+  } else {
+    fallbackCopyText(fullText);
+    handleFormFeedback(`Texto copiado para a área de transferência!`);
+  }
+}
+
+function handleFormFeedback(message) {
+  const statusMsg = document.getElementById('form-status-msg');
+  if (statusMsg) {
+    statusMsg.textContent = message;
+    statusMsg.className = 'text-xs text-center text-emerald-600 dark:text-emerald-400 font-semibold mt-2';
+  }
+  showToast(message);
+
+  setTimeout(() => {
+    if (statusMsg) statusMsg.textContent = '';
+  }, 7000);
+}
+
+// Expor funções interativas para o escopo global (compatibilidade com ES Modules / Vite)
+window.copyEmailToClipboard = copyEmailToClipboard;
+window.openProjectModal = openProjectModal;
+window.closeProjectModal = closeProjectModal;
+window.handleContactSubmit = handleContactSubmit;
+window.sendViaWhatsApp = sendViaWhatsApp;
+window.copyFormMessage = copyFormMessage;
+window.showToast = showToast;
+
+
