@@ -34,6 +34,6 @@ npm run preview
 ## 📬 Contato
 
 - **GitHub**: [DiogoSoneghete](https://github.com/DiogoSoneghete)
-- **LinkedIn**: [Diogo Soneghete](https://www.linkedin.com/in/diogosoneghete/)
+- **LinkedIn**: [Diogo Soneghete](https://www.linkedin.com/in/diogo-soneghete/)
 - **E-mail**: [diogosonegueti@gmail.com](mailto:diogosonegueti@gmail.com)
 - **Localização**: Vila Velha – ES, Brasil
